@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Điện Thoại</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    .container-fluid {
+        padding: 0;
+        margin: 0;
+        background-color: #f8f9fa;
+    }
+   .navbar {
+        padding: 0;
+        margin: 0;
+    }
+    .navbar-nav {
+        margin-left: auto;
+    }
+    .card {
+        border: none;
+    }
+</style>
+<body>
+    <div class="container"></div>
+
+        <div class="container-fluid bg-primary text-white text-center p-3">
+            <h2>shopdienthoai</h2>
+            <p>Chào mừng bạn đến với shop điện thoại shopdienthoai</p>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="###">Trang Chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="gioiThieu" role="button" data-bs-toggle="dropdown">Giới Thiệu</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="lichsu.html">Lịch sử phát triển</a></li>
+                            <li><a class="dropdown-item" href="sumenh.html">Sứ mệnh</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sanPham" role="button" data-bs-toggle="dropdown">Sản Phẩm</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">iphone</a></li>
+                            <li><a class="dropdown-item" href="#">samsung</a></li>
+                            <li><a class="dropdown-item" href="#">oppo</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="lienhe.html">Liên Hệ</a></li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search...">
+                    <button class="btn btn-outline-primary" type="submit">Tìm kiếm</button>
+                </form>
+                <a class="btn btn-primary ms-3" href="dangnhap2.html">Đăng Nhập</a>
+            </div>
+        </div>
+        </nav>
+
+        <div class="container mt-4">
+            <!--Dữ liệu sản phẩm-->
+            <div class="row" id="product-container"></div>
+        </div>
+
+        <footer class="bg-info text-white text-center py-3 mt-4">
+            <p>&copy; <a href="https://bhxmel.github.io/shopdienthoai.com/index.html" class="text-white">shopdienthoai.com</a></p>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            function updateCartCount() {
+                $('#cart-count').text(cart.length);
+            }
+            const products = [
+                { image: "iphone13.jpg", name: "iPhone 13", spec: "Chip A15 Bionic, RAM 4GB, ROM 128GB, Màn hình 6.1 inch", oldPrice: "18,000,000 VND", newPrice: "15,900,000 VND" },
+                { image: "samsungs23.jpg", name: "Samsung Galaxy S23", spec: "Chip Snapdragon 8 Gen 2, RAM 8GB, ROM 256GB, Màn hình 6.1 inch", oldPrice: "22,990,000 VND", newPrice: "19,990,000 VND" },
+                { image: "xiaomi12.png", name: "Xiaomi Redmi Note 12", spec: "Chip Snapdragon 685, RAM 6GB, ROM 128GB, Màn hình 6.67 inch", newPrice: "4,990,000 VND" },
+                { image: "oppo8.webp", name: "Oppo Reno 8", spec: "Chip Dimensity 1300, RAM 8GB, ROM 256GB, Màn hình 6.4 inch", oldPrice: "10,990,000 VND", newPrice: "9,490,000 VND" },
+                { image: "vivov25.jpg", name: "Vivo V25", spec: "Chip MediaTek Dimensity 900, RAM 12GB, ROM 256GB, Màn hình 6.44 inch", newPrice: "9,190,000 VND" },
+                { image: "realme10pro.webp", name: "Realme 10 Pro", spec: "Chip Snapdragon 695, RAM 8GB, ROM 128GB, Màn hình 6.72 inch", oldPrice: "8,990,000 VND", newPrice: "7,890,000 VND" },
+                { image: "googlep7.png", name: "Google Pixel 7", spec: "Chip Google Tensor G2, RAM 8GB, ROM 128GB, Màn hình 6.3 inch", newPrice: "14,990,000 VND" },
+                { image: "oneplus2.jpg", name: "OnePlus Nord 2", spec: "Chip Dimensity 1200, RAM 8GB, ROM 128GB, Màn hình 6.43 inch", oldPrice: "9,990,000 VND", newPrice: "8,490,000 VND" }
+            ];
+            let productHTML = "";
+            products.forEach((product, index) => {
+                productHTML += `
+                    <div class="col-md-3 col-lg-3 mb-4">
+                        <div class="card">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.spec}</p>
+                                <p class="text-muted"><s>${product.oldPrice || ""}</s></p>
+                                <p class="text-danger fw-bold">${product.newPrice}</p>
+                                <button class="btn btn-primary buy-now" data-index="${index}">Mua ngay</button>
+                                <button class="btn btn-success add-to-cart" data-index="${index}">Giỏ hàng</button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            // Hiển thị dữ liệu sản phẩm và thêm sự kiện click vào các nút ưu tiên
+            $('#product-container').html(productHTML);
+            $(document).on('click', '.add-to-cart', function () {
+                const index = $(this).data('index');
+                cart.push(products[index]);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                alert(`Đã thêm ${products[index].name} vào giỏ hàng!`);
+            });
+            // Click vào nút mua chuyển hướng đến trang thanh toán
+            $(document).on('click', '.buy-now', function () {
+                const index = $(this).data('index');
+                const product = products[index];
+                window.location.href = "thanhtoan.html";
+            });
+            // Cập nhật số lượng sản phẩm trong giỏ hàng
+            $(".navbar-nav").append('<li class="nav-item"><a class="nav-link" href="giohang.html">Giỏ Hàng (<span id="cart-count">0</span>)</a></li>');
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
